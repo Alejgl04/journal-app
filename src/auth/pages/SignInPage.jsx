@@ -32,8 +32,9 @@ export const SignInPage = () => {
           </Grid>
 
           <Grid container direction="row" justifyContent="end">
+            <Typography sx={{ mr: 1 }}>New member?</Typography>
             <Link component={RouterLink} color='inherit' to="/auth/sign-up">
-              Don&apos;t you have account yet? 
+              Sign up 
             </Link>
           </Grid>
 
