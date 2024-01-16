@@ -1,30 +1,74 @@
 import {  Link as RouterLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Button, Grid, Link, TextField, Typography } from '@mui/material';
 import { Google } from '@mui/icons-material';
+
+import { useForm } from '../../hooks';
 import { AuthLayout } from '../layout/AuthLayout';
+import { checkingAuthentication, startGoogleSignIn } from '../../store/auth';
 
 export const SignInPage = () => {
+
+  const dispatch = useDispatch();
+
+  const { email, password, onInputChange } = useForm({
+    email: 'alejandro@google.com',
+    password: '123456'
+  });
+
+  const onSubmit = ( event ) => {
+    event.preventDefault();
+
+    console.log({ email, password });
+    dispatch( checkingAuthentication() )
+  }
+
+  const onGoogleSubmit = () => {
+    console.log('Hello google');
+    dispatch(startGoogleSignIn());
+  }
+
+
   return (
     // Container
     <AuthLayout title="Sign in">
-      <form>
+      <form onSubmit={ onSubmit }>
         <Grid container>
 
           <Grid item xs={12} sx={{ mt: 2 }}>
-            <TextField label="Email" type="email" fullWidth></TextField>
+            <TextField 
+              label="Email" 
+              type="email" 
+              name="email" 
+              value={email} 
+              onChange={onInputChange} 
+              fullWidth
+            >
+            </TextField>
           </Grid>
           <Grid item xs={12} sx={{ mt: 2 }}>
-            <TextField label="Password" type="password" fullWidth></TextField>
+            <TextField 
+              label="Password" 
+              type="password"
+              name="password" 
+              value={password} 
+              onChange={onInputChange} 
+              fullWidth
+            ></TextField>
           </Grid>
 
           <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
             <Grid item xs={12} sm={6}>
-              <Button variant="contained" fullWidth>
+              <Button type="submit" variant="contained" fullWidth>
                 Submit
               </Button>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Button variant="contained" fullWidth>
+              <Button 
+                onClick={ onGoogleSubmit }
+                variant="contained" 
+                fullWidth
+              >
                 <Google />
                 <Typography sx={{ ml: 1 }}> Google </Typography>
               </Button>
