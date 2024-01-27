@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {  Link as RouterLink } from 'react-router-dom';
-import { Button, Grid, Link, TextField, Typography } from '@mui/material';
+import { Alert, Button, Grid, Link, TextField, Typography } from '@mui/material';
 import { AuthLayout } from '../layout/AuthLayout';
 import { useForm } from '../../hooks/useForm';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { startCreateUserCredentials } from '../../store/auth';
 
 const formData = {
@@ -23,6 +23,9 @@ export const SignUpPage = () => {
   
   const dispatch = useDispatch();
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const { status, errorMessage } = useSelector( state => state.auth );
+  const isCheckingAuthentication = useMemo( () => status === 'checking', [status]);
 
   const { 
     isFormValid, displayName, email, password, onInputChange, formState,
@@ -82,12 +85,23 @@ export const SignUpPage = () => {
           </Grid>
 
           <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
+
+            <Grid
+              item 
+              xs={12}
+              display={ errorMessage ? '' : 'none' }
+              >
+              <Alert severity='error'>{errorMessage}</Alert>
+            </Grid>
+
             <Grid item xs={12}>
               <Button 
+              disabled={isCheckingAuthentication}
                 variant="contained" 
                 fullWidth
                 type="submit"
               >
+                
                 Submit
               </Button>
             </Grid>
