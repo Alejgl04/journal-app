@@ -15,8 +15,8 @@ export const SignInPage = () => {
   const isAuthenticated = useMemo( () => status === 'checking', [status]);
 
   const { email, password, onInputChange } = useForm({
-    email: 'alejandro@google.com',
-    password: '123456'
+    email: '',
+    password: ''
   });
 
 
