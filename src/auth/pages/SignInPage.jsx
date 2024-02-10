@@ -8,16 +8,18 @@ import { useForm } from '../../hooks';
 import { AuthLayout } from '../layout/AuthLayout';
 import { startGoogleSignIn, startSignInWithEmail } from '../../store/auth';
 
+
+const formData = {
+  email: '',
+  password: ''
+}
 export const SignInPage = () => {
 
   const { status, errorMessage } = useSelector( state => state.auth );
   const dispatch = useDispatch();
   const isAuthenticated = useMemo( () => status === 'checking', [status]);
 
-  const { email, password, onInputChange } = useForm({
-    email: '',
-    password: ''
-  });
+  const { email, password, onInputChange } = useForm(formData);
 
 
   const onSubmit = ( event ) => {
@@ -26,7 +28,6 @@ export const SignInPage = () => {
   }
 
   const onGoogleSubmit = () => {
-    console.log('Hello google');
     dispatch(startGoogleSignIn());
   }
 

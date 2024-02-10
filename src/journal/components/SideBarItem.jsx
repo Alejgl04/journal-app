@@ -38,6 +38,6 @@ SideBarItem.propTypes = {
   title: PropTypes.string,
   body: PropTypes.string,
   id: PropTypes.string,
-  date: PropTypes.Date,
+  date: PropTypes.any,
   imageUrls: PropTypes.string,
 }
