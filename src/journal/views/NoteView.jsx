@@ -4,12 +4,12 @@ import { useEffect, useMemo, useRef } from 'react'
 import Swal from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.css';
 
-import { SaveOutlined, UploadOutlined } from '@mui/icons-material'
+import { DeleteOutlined, SaveOutlined, UploadOutlined } from '@mui/icons-material'
 import { Button, Grid, IconButton, TextField, Typography } from '@mui/material'
 
 import { ImageGallery } from '../components'
 
-import { setActiveNote, startSaveNote, startUploadingFiles } from '../../store/journal'
+import { setActiveNote, startDeletedNote, startSaveNote, startUploadingFiles } from '../../store/journal'
 import { useForm } from '../../hooks/useForm'
 
 export const NoteView = () => {
@@ -48,6 +48,10 @@ export const NoteView = () => {
     console.log('uploading...');
 
     dispatch( startUploadingFiles(target.files));
+  }
+
+  const onDeleteNote = () => {
+    dispatch( startDeletedNote() );
   }
   
   return (
@@ -111,6 +115,17 @@ export const NoteView = () => {
           onChange={onInputChange}
           minRows={ 5 }
         />
+      </Grid>
+
+      <Grid container justifyContent='end'>
+        <Button
+          onClick={ onDeleteNote }
+          sx={{ mt: 2}}
+          color='error'
+        >
+          <DeleteOutlined/>
+          Remove Note
+        </Button>
       </Grid>
 
       <ImageGallery images={note.imageUrls} />
