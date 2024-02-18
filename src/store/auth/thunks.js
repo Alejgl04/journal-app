@@ -1,4 +1,4 @@
-import { logOutFirebase, registerUserWithCredentials, sigInWithEmail, signInWithGoole } from '../../firebase/providers';
+import { logOutFirebase, registerUserWithCredentials, sigInWithEmail, signInWithFacebook, signInWithGoole } from '../../firebase/providers';
 import { clearNotesLogout } from '../journal';
 import { checkingCredentials, login, logout } from './authSlice';
 
@@ -20,6 +20,18 @@ export const startGoogleSignIn = () => {
     dispatch( login( result ) )
   }
 }
+
+// export const startFacebookSignIn = () => {
+//   return async( dispatch ) => {
+//     dispatch( checkingCredentials() );
+
+//     const result = await signInWithFacebook();
+//     if ( !result.ok ) return dispatch( logout ( result.errorMessage ));
+
+//     dispatch( login( result ) )
+//   }
+// }
+
 
 export const startCreateUserCredentials = ({ email, password, displayName }) => {
 

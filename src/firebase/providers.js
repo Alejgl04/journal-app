@@ -1,7 +1,8 @@
-import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, FacebookAuthProvider } from 'firebase/auth';
 import { firebaseAuth } from "./config";
 
 const googleProvider = new GoogleAuthProvider();
+const facebookProvider = new FacebookAuthProvider();
 
 export const signInWithGoole = async() => {
 
@@ -24,8 +25,29 @@ export const signInWithGoole = async() => {
       errorMessage
     }
   }
-
 }
+
+export const signInWithFacebook = async() => {
+  try {
+
+    const result = await signInWithPopup(firebaseAuth, facebookProvider);
+    const { displayName, email, photoURL, uid } = result.user;
+
+    return {
+      ok: true,
+      displayName, email, photoURL, uid
+    }
+
+  } catch (error) {
+    const errorMessage = error.message;
+
+    return {
+      ok: false,
+      errorMessage
+    }
+  }
+}
+
 export const registerUserWithCredentials = async({ email, password, displayName }) => {
 
   try {
