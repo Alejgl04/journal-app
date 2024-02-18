@@ -13,6 +13,11 @@ export const SideBarItem = ({ title = '', body, id, date, imageUrls = [] }) => {
       ? title.substring(0,17) + '...'
       : title;
   }, [title])
+  const newDescription = useMemo( () => {
+    return body.length > 50
+      ? body.substring(0,50) + '...'
+      : body;
+  }, [body])
 
   const dispatch = useDispatch();
 
@@ -28,7 +33,7 @@ export const SideBarItem = ({ title = '', body, id, date, imageUrls = [] }) => {
       </ListItemIcon>
       <Grid container>
         <ListItemText primary={newTitle}/>
-        <ListItemText secondary={body}/>
+        <ListItemText secondary={newDescription}/>
       </Grid>
     </ListItemButton>
   </ListItem>  )
