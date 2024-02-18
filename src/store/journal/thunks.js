@@ -6,6 +6,7 @@ import { fileUpload, loadNotes } from '../../helpers';
 export const startNewNote = () => {
 
   return async( dispatch, getState ) => {
+
     dispatch( savingNewNote());
 
     const { uid } = getState().auth;
