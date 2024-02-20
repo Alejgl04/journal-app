@@ -7,20 +7,31 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "jest --watchAll"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-react": "^7.23.3",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.3",
     "@mui/material": "^5.15.3",
     "@reduxjs/toolkit": "^2.0.1",
+    "@testing-library/react": "^14.2.1",
+    "@types/jest": "^29.5.12",
+    "babel-jest": "^29.7.0",
     "firebase": "^10.7.2",
+    "i": "^0.3.7",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "npm": "^10.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.21.1",
-    "sweetalert2": "^11.10.5"
+    "sweetalert2": "^11.10.5",
+    "whatwg-fetch": "^3.6.20"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
